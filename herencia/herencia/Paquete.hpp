@@ -17,7 +17,7 @@ private:
     double costoPorKilo;
 public:
     Paquete(Persona, Persona, int, int, int, int, double);
-    double calculaCosto() override;
+    double calculaCosto(); // override para redefinir método virtual
 };
 
 #endif /* Paquete_hpp */
