@@ -4,8 +4,10 @@
 //
 
 #include "Player.hpp"
+using namespace std;
 
-Player::Player(int id) : id(id) {
+Player::Player(int id) {
+    this->id = id;
     this->position = 1;
 }
 
@@ -13,8 +15,12 @@ int Player::getPosition() {
     return this->position;
 }
 
-void Player::changePosition(int change) {
+int Player::changePosition(int change) {
     this->position += change;
+    if (this->position < 1) {
+        this->position = 1;
+    }
+    return this->position;
 }
 
 void Player::setPosition(int position) {
@@ -23,4 +29,8 @@ void Player::setPosition(int position) {
 
 int Player::getID() {
     return this->id;
+}
+
+void Player::setID(int id) {
+    this->id = id;
 }

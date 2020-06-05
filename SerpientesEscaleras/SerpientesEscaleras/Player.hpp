@@ -7,6 +7,9 @@
 #ifndef Player_hpp
 #define Player_hpp
 
+#include <string>
+using std::string;
+
 class Player {
 private:
     int position;
@@ -14,9 +17,10 @@ private:
 public:
     Player(int);
     int getPosition();
-    void changePosition(int);
+    int changePosition(int);
     void setPosition(int);
     int getID();
+    void setID(int);
 };
 
 #endif /* Player_hpp */

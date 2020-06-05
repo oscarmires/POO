@@ -4,11 +4,12 @@
 //
 
 #include "Tile.hpp"
+#include <cstdio>
 
-Tile::Tile() {}
-
-Tile::Tile(int type) {
-    this->type = type;
+Tile::Tile() {
+    this->type = 'N';
+    this->id = 0;
+    this->move = 0;
 }
 
 void Tile::setID(int id) {
@@ -19,6 +20,10 @@ int Tile::getID() {
     return this->id;
 }
 
-int Tile::getType() {
+int Tile::getMove() {
+    return this->move;
+}
+
+char Tile::getType() {
     return this->type;
 }

@@ -7,15 +7,16 @@
 #define Tile_hpp
 
 class Tile {
-private:
-    int type, id;
+protected:
+    int id;
+    int move = 0;
+    char type = 'N';
 public:
     Tile();
-    Tile(int);
     void setID(int id);
     int getID();
-    int getType();
-    enum Type {S, L, N};
+    int getMove();
+    char getType();
 };
 
 #endif /* Tile_hpp */

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		555B4A0F2486953100312B32 /* ManualGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555B4A0D2486953100312B32 /* ManualGame.cpp */; };
+		555B4A122486AFC000312B32 /* Ladder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555B4A102486AFC000312B32 /* Ladder.cpp */; };
+		555B4A152486B25700312B32 /* Snake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555B4A132486B25700312B32 /* Snake.cpp */; };
+		555B4A312488039200312B32 /* AutoGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555B4A2F2488039200312B32 /* AutoGame.cpp */; };
 		55A03D9B2478D6E400E4A779 /* snakes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A03D9A2478D6E400E4A779 /* snakes.cpp */; };
 		55A03DA92478D73C00E4A779 /* MyGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A03DA32478D73C00E4A779 /* MyGame.cpp */; };
 		55A03DAA2478D73C00E4A779 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A03DA42478D73C00E4A779 /* Tile.cpp */; };
@@ -28,6 +32,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		555B4A0D2486953100312B32 /* ManualGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ManualGame.cpp; sourceTree = "<group>"; };
+		555B4A0E2486953100312B32 /* ManualGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ManualGame.hpp; sourceTree = "<group>"; };
+		555B4A102486AFC000312B32 /* Ladder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ladder.cpp; sourceTree = "<group>"; };
+		555B4A112486AFC000312B32 /* Ladder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ladder.hpp; sourceTree = "<group>"; };
+		555B4A132486B25700312B32 /* Snake.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Snake.cpp; sourceTree = "<group>"; };
+		555B4A142486B25700312B32 /* Snake.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Snake.hpp; sourceTree = "<group>"; };
+		555B4A2F2488039200312B32 /* AutoGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AutoGame.cpp; sourceTree = "<group>"; };
+		555B4A302488039200312B32 /* AutoGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AutoGame.hpp; sourceTree = "<group>"; };
 		55A03D972478D6E400E4A779 /* SerpientesEscaleras */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SerpientesEscaleras; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A03D9A2478D6E400E4A779 /* snakes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = snakes.cpp; sourceTree = "<group>"; };
 		55A03DA12478D73C00E4A779 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
@@ -75,10 +87,18 @@
 				55A03D9A2478D6E400E4A779 /* snakes.cpp */,
 				55A03DA32478D73C00E4A779 /* MyGame.cpp */,
 				55A03DA72478D73C00E4A779 /* MyGame.hpp */,
+				555B4A2F2488039200312B32 /* AutoGame.cpp */,
+				555B4A302488039200312B32 /* AutoGame.hpp */,
+				555B4A0D2486953100312B32 /* ManualGame.cpp */,
+				555B4A0E2486953100312B32 /* ManualGame.hpp */,
 				55A03DAD2479AEEC00E4A779 /* Board.cpp */,
 				55A03DAE2479AEEC00E4A779 /* Board.hpp */,
 				55A03DA42478D73C00E4A779 /* Tile.cpp */,
 				55A03DA22478D73C00E4A779 /* Tile.hpp */,
+				555B4A102486AFC000312B32 /* Ladder.cpp */,
+				555B4A112486AFC000312B32 /* Ladder.hpp */,
+				555B4A132486B25700312B32 /* Snake.cpp */,
+				555B4A142486B25700312B32 /* Snake.hpp */,
 				55A03DA52478D73C00E4A779 /* Dice.cpp */,
 				55A03DA82478D73C00E4A779 /* Dice.hpp */,
 				55A03DA62478D73C00E4A779 /* Player.cpp */,
@@ -148,8 +168,12 @@
 				55A03DAA2478D73C00E4A779 /* Tile.cpp in Sources */,
 				55A03DA92478D73C00E4A779 /* MyGame.cpp in Sources */,
 				55A03DAB2478D73C00E4A779 /* Dice.cpp in Sources */,
+				555B4A0F2486953100312B32 /* ManualGame.cpp in Sources */,
 				55A03D9B2478D6E400E4A779 /* snakes.cpp in Sources */,
 				55A03DAC2478D73C00E4A779 /* Player.cpp in Sources */,
+				555B4A122486AFC000312B32 /* Ladder.cpp in Sources */,
+				555B4A312488039200312B32 /* AutoGame.cpp in Sources */,
+				555B4A152486B25700312B32 /* Snake.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

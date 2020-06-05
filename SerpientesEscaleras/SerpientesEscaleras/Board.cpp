@@ -9,56 +9,44 @@
 #include <chrono>
 #include <iostream>
 
-Board::Board() {
-    for (int i = 0; i < 21; ++i) {
-        Tile tile(Tile::Type::N);
-        this->tiles.push_back(tile);
+Board::Board(int tiles, int snakes, int ladders, int penalty, int reward) {
+    for (int i = 0; i < tiles - snakes - ladders; ++i) {
+        this->tiles.push_back(new Tile);
     }
-    for (int i = 0; i < 3; ++i) {
-        Tile tile(Tile::Type::S);
-        this->tiles.push_back(tile);
+    for (int i = 0; i < snakes; ++i) {
+        this->tiles.push_back(new Snake(penalty));
     }
-    for (int i = 0; i < 3; ++i) {
-        Tile tile(Tile::Type::L);
-        this->tiles.push_back(tile);
-    }
-    for (int i = 0; i < 3; ++i) {
-        Tile tile(Tile::Type::N);
-        this->tiles.push_back(tile);
+    for (int i = 0; i < ladders; ++i) {
+        this->tiles.push_back(new Ladder(reward));
     }
     
     unsigned int seed = (unsigned int) std::chrono::system_clock::now().time_since_epoch().count(); // generar semilla
-    std::shuffle(this->tiles.begin()+3, this->tiles.end()-3, std::default_random_engine(seed)); // revolver tiles (utiliza begin()+3 para que las primeras 3 siempre sean tipo N...)
+    std::shuffle(this->tiles.begin(), this->tiles.end(), std::default_random_engine(seed)); // revolver tiles
     
     int i = 1;
-    for (Tile &tile : this->tiles) {
-        tile.setID(i);
+    for (auto &tile : this->tiles) {
+        tile->setID(i);
         ++i;
     }
 }
 
-unsigned long int Board::size() {
-    return this->tiles.size();
+int Board::size() {
+    return (int) this->tiles.size();
 }
 
 Tile Board::getTile(int pos) {
-    return this->tiles[pos];
+    if (pos < this->size()) {
+        return *this->tiles[pos];
+    } else {
+        Tile tile;
+        return tile;
+    }
 }
 
 void Board::print() {
     std::cout << "Board: ";
-    for (Tile t : this->tiles) {
-        switch (t.getType()) {
-            case Tile::Type::S:
-                std::cout << "S ";
-                break;
-            case Tile::Type::L:
-                std::cout << "L ";
-                break;
-            case Tile::Type::N:
-                std::cout << "N ";
-                break;
-        }
+    for (auto t : this->tiles) {
+        std::cout << t->getType() << ' ';
     }
     std::cout << std::endl;
 }

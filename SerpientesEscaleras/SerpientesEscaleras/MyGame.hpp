@@ -1,5 +1,5 @@
 //
-//  MyGame.cpp
+//  MyGame.hpp
 //  Oscar Miranda Escalante A01630791
 //
 
@@ -9,20 +9,22 @@
 #include "Player.hpp"
 #include "Board.hpp"
 #include "Dice.hpp"
+#include <iostream>
+#include <vector>
 
 class MyGame {
-private:
-    Board board;
-    Player player1;
-    Player player2;
+protected:
+    Board* board;
+    std::vector<Player*> players;
+    Player* winner;
     Dice dice;
     int turn;
     int turnLimit;
-    Player* currentPlayer;
 public:
-    MyGame();
-    void nextTurn();
-    void start();
+    // tiles, snakes, ladders, penalty, reward, turnLimit)
+    MyGame(int = 30, int = 3, int = 3, int = -3, int = 3, int = 2, int = 20);
+    bool go(Player*);
+    virtual void start();
 };
 
 #endif /* MyGame_hpp */

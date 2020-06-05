@@ -6,73 +6,37 @@
 #include "MyGame.hpp"
 #include <iostream>
 
-MyGame::MyGame() : player1(1), player2(2) {
+MyGame::MyGame(int tiles, int snakes, int ladders, int penalty, int reward, int players, int turnLimit) {
+    this->board = new Board(tiles, snakes, ladders, penalty, reward);
     this->turn = 1;
-    this->turnLimit = 30;
-    this->currentPlayer = &player1;
+    this->turnLimit = turnLimit;
+    for (int i = 0; i < players; ++i) {
+        this->players.push_back(new Player(i+1));
+    }
 }
 
-void MyGame::nextTurn() {
-    if (currentPlayer->getID() == player1.getID()) {
-        currentPlayer = &player2;
-    } else {
-        currentPlayer = &player1;
+bool MyGame::go(Player * pl) {
+    // registar posición actual
+    int prevPos = pl->getPosition();
+    // mover jugador y registrar nueva posición
+    int diceVal = this->dice.roll();
+    int playerPos = pl->changePosition(diceVal);
+    // registrar tipo de casilla donde cae
+    char firstResultType = this->board->getTile(playerPos-1).getType();
+    // mover según reward o penalty
+    playerPos = pl->changePosition(board->getTile(playerPos-1).getMove());
+    // caso ganador - imprimir (turno, jugador, casilla, numdado, tipo, posfinal)
+    if (playerPos >= this->board->size()) {
+        printf("%d %d %d %d N >=%d\n", turn, pl->getID(), prevPos, diceVal, this->board->size());
+        this->winner = pl;
+        return true;
     }
+    // imprimir datos (turno, jugador, casilla, numdado, tipo, posfinal)
+    printf("%d %d %d %d %c %d\n", turn, pl->getID(), prevPos, diceVal, firstResultType, playerPos);
     ++this->turn;
+    return false;
 }
 
-void MyGame::start() {
-    this->board.print();
-    puts("Press C to continue next turn, or E to end the game");
-    char cont;
-    int diceVal, playerPos;
-    char firstResultType = 'N';
-    do {
-        std::cin >> cont;
-        if (cont != 'E' && cont != 'C') {
-            std::cout << "Invalid option, please press C to continue next turn "
-            "or E to end the game" << std::endl;
-            cont = 'C';
-            continue;
-        }
-        // registar posición actual
-        int prevPos = currentPlayer->getPosition();
-        // mover jugador
-        diceVal = dice.roll();
-        currentPlayer->changePosition(diceVal);
+void MyGame::start() {}
 
-        switch (board.getTile(currentPlayer->getPosition()-1).getType()) {
-            case Tile::Type::S:
-                firstResultType = 'S';
-                this->currentPlayer->changePosition(-3);
-                break;
-            case Tile::Type::L:
-                firstResultType = 'L';
-                this->currentPlayer->changePosition(+3);
-                break;
-            case Tile::Type::N:
-                firstResultType = 'N';
-                break;
-        }
-        
-        // registrar nueva posición
-        playerPos = this->currentPlayer->getPosition();
-        // imprimir datos (turno, jugador, casilla, numdado, tipo, posfinal)
-        if (playerPos >= 30) {
-            printf("%d %d %d %d N >=30\n", turn, this->currentPlayer->getID(), prevPos, diceVal);
-            break;
-        }
-        printf("%d %d %d %d %c %d\n", turn, this->currentPlayer->getID(), prevPos, diceVal, firstResultType, playerPos);
-        nextTurn();
-    } while (cont == 'C' && turn <= turnLimit);
-    
-    std::puts("-- GAME OVER --");
-    
-    if (cont == 'E') {
-        std::puts("Thanks for playing!!!");
-    } else if (turn > turnLimit) {
-        std::puts("The maximum number of turns has been reached.");
-    } else {
-        printf("Player %d is the winner!!!\n", this->currentPlayer->getID());
-    }
-}
+
