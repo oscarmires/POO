@@ -5,44 +5,58 @@
 
 #include "ManualGame.hpp"
 #include "AutoGame.hpp"
+#include "InvalidConfigurationException.hpp"
 #include <iostream>
 using namespace std;
 
 
 int main(int argc, const char * argv[]) {
-    // args: path tiles snakes ladders penalty reward players turnlimit gametype
-    if (argc == 1) {
-        ManualGame g;
-        g.start();
-    } else if (argc == 9) {
-        // convertir argv a enteros
-        int * argvint = new int[9];
-        for (int i = 0; i < 9; ++i) {
-            argvint[i] = atoi(argv[i]);
-        }
-        string mode = argv[8];
-        // modo manual
-        if (mode == "M") {
-            ManualGame g(argvint[1], argvint[2], argvint[3], argvint[4], argvint[5], argvint[6], argvint[7]);
+    // args: path tiles snakes ladders penalty reward players turnLimit gametype
+    try {
+        if (argc == 1) {
+            ManualGame g;
             g.start();
-        // modo automático
-        } else if (mode == "A") {
-            AutoGame g(argvint[1], argvint[2], argvint[3], argvint[4], argvint[5], argvint[6], argvint[7]);
-            g.start();
+        } else if (argc == 9) {
+            // convertir argv a enteros
+            int * argv_int = new int[8];
+            for (int i = 0; i < 8; ++i) {
+                argv_int[i] = atoi(argv[i]);
+            }
+            string mode = argv[8];
+            
+            if (argv_int[1] <= argv_int[2] + argv_int[3]) { // tiles < snakes + ladders
+                throw InvalidConfigurationException("tiles", argv_int[1]);
+            }
+            if (argv_int[2] < 0) { // snakes
+                throw InvalidConfigurationException("snakes", argv_int[2]);
+            }
+            if (argv_int[3] < 0) { // ladders
+                throw InvalidConfigurationException("ladders", argv_int[3]);
+            }
+            if (argv_int[6] < 1) { // players
+                throw InvalidConfigurationException("players", argv_int[6]);
+            }
+            if (argv_int[7] < 2) { // turnLimit
+                throw InvalidConfigurationException("turnLimit", argv_int[7]);
+            }
+            
+            // modo manual
+            if (mode == "M") {
+                ManualGame g(argv_int[1], argv_int[2], argv_int[3], argv_int[4], argv_int[5], argv_int[6], argv_int[7]);
+                g.start();
+            // modo automático
+            } else if (mode == "A") {
+                AutoGame g(argv_int[1], argv_int[2], argv_int[3], argv_int[4], argv_int[5], argv_int[6], argv_int[7]);
+                g.start();
+            } else {
+                throw InvalidConfigurationException("gameType", mode);
+            }
+        } else {
+            throw InvalidConfigurationException();
         }
-    } else {
-        puts("Error: wrong number of arguments.");
-        puts("For customized game, use all of the following...");
-        cout <<
-        "tiles: int\n"
-        "snakes: int\n"
-        "ladders: int\n"
-        "penalty: int\n"
-        "reward: int\n"
-        "players: int > 2\n"
-        "turns: int > 2\n"
-        "gametype: M for manual, A for auto"
-        << endl;
+    } catch (InvalidConfigurationException& ice) {
+        cerr << ice.what() << endl;
+        return 1;
     }
     return 0;
 }

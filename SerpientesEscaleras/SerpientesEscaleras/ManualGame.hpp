@@ -7,6 +7,7 @@
 #define ManualGame_hpp
 
 #include "MyGame.hpp"
+#include "InvalidOptionException.hpp"
 
 class ManualGame : protected MyGame {
 public:
